@@ -7,6 +7,7 @@ Install node: https://nodejs.org/en/
 Clone the tutorial project:
 `git clone https://github.com/chrisdevereux/codespace.git`
 
-# Wifi:
+# Wifi
+
 4GEE
 jazz-fire-4289
