@@ -5,6 +5,10 @@ import './App.css';
 class App extends Component {
   state = {}
 
+  get totalCost() {
+    return this.state.sandwichPrice * this.state.numberOfSandwiches
+  }
+
   render() {
     return (
       <div className="App">
@@ -13,20 +17,22 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
 
-        <p className="App-intro" style={{ display: 'flex', flexDirection: 'rows' }}>
-          <Sidebar />
-          <div>
-            <Card color="grey">Hello Codespace</Card>
-            <Card>Hello Codespace</Card>
-            <Card>Hello Codespace</Card>
-            <Card>Hello Codespace</Card>
-            <Card>Hello Codespace</Card>
-            <Card>Hello Codespace!</Card>
-          </div>
+        <p className="App-intro">
+          You need {this.totalCost} for your sandwiches
         </p>
         <div>
-          <Field label="How much is a sandwich?" />
-          <Field label="How much does it cost?" />
+          <Field
+            label="How much is a sandwich?"
+            onChange={sandwichPrice => {
+              this.setState({ sandwichPrice })
+            }}
+          />
+          <Field
+            label="How many do you want?"
+            onChange={numberOfSandwiches => {
+              this.setState({ numberOfSandwiches })
+            }}
+          />
         </div>
       </div>
     );
@@ -37,8 +43,14 @@ function Field({ label, onChange }) {
   return (
     <div>
       <label>
-        {label}
-        <input onChange={onChange} />
+        <span style={{ marginRight: '1em' }}>
+          {label}
+        </span>
+        <input
+          onChange={event => {
+            onChange(Number(event.target.value))
+          }}
+        />
       </label>
     </div>
   )
